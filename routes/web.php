@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/', '[命名空间/控制器]@[行为]');
