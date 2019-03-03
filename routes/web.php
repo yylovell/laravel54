@@ -15,4 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/', '[命名空间/控制器]@[行为]');
+// Route::get('/', '[控制器]@[行为]');
+
+//
+Route::get('/posts', 'PostController@index');
+//
+Route::get('/posts/{post}', 'PostController@show');
+//
+Route::get('/posts/create', 'PostController@create');
+//
+Route::post('/posts', 'PostController@store');
+//
+Route::get('/posts/{post}/edit', 'PostController@edit');
+//
+Route::put('/posts/{post}', 'PostController@update');
+//
+Route::get('/posts/del', 'PostController@del');
