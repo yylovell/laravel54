@@ -20,14 +20,16 @@ Route::get('/', function () {
 //
 Route::get('/posts', 'PostController@index');
 //
-Route::get('/posts/{post}', 'PostController@show');
-//
 Route::get('/posts/create', 'PostController@create');
 //
 Route::post('/posts', 'PostController@store');
+//
+Route::get('/posts/{post}', 'PostController@show');
 //
 Route::get('/posts/{post}/edit', 'PostController@edit');
 //
 Route::put('/posts/{post}', 'PostController@update');
 //
-Route::get('/posts/del', 'PostController@del');
+Route::get('/posts/{post}/del', 'PostController@del');
+//
+Route::post('/posts/image/upload', 'PostController@imageUpload');
