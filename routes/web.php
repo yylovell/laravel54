@@ -30,6 +30,6 @@ Route::get('/posts/{post}/edit', 'PostController@edit');
 //
 Route::put('/posts/{post}', 'PostController@update');
 //
-Route::get('/posts/{post}/del', 'PostController@del');
+Route::get('/posts/{post}/delete', 'PostController@delete');
 //
 Route::post('/posts/image/upload', 'PostController@imageUpload');
