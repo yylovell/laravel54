@@ -16,7 +16,27 @@ Route::get('/', function () {
 });
 
 // Route::get('/', '[控制器]@[行为]');
+// 注册
+Route::get('/register', 'RegisterController@index');
+Route::post('/register', 'RegisterController@register');
 
+// 登录
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
+
+//个人设置页面
+Route::get('/user/me/setting', 'UserController@setting');
+Route::post('/user/me/setting', 'UserController@settingStore');
+
+
+
+
+
+
+
+
+// 文章
 //
 Route::get('/posts', 'PostController@index');
 //

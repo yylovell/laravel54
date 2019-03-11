@@ -28,7 +28,9 @@ class PostController extends Controller
             ]
         );
 
+        $user_id = \Auth::id();
         $insert = request(['title', 'content']);
+        $insert = array_merge($insert, compact('user_id'));
         $res = Post::create($insert);
 
         return redirect("/posts");
@@ -45,6 +47,8 @@ class PostController extends Controller
             ]
         );
 
+        $this->authorize('update', $post);
+
         $post->title = request('title');
         $post->content = request('content');
         $post->save();
@@ -53,6 +57,7 @@ class PostController extends Controller
         return redirect("/posts/{$post->id}");
     }
     public function delete(Post $post) {
+        $this->authorize('delete', $post);
         $post->delete();
         return redirect("/posts");
     }
