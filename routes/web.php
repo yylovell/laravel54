@@ -30,12 +30,6 @@ Route::get('/user/me/setting', 'UserController@setting');
 Route::post('/user/me/setting', 'UserController@settingStore');
 
 
-
-
-
-
-
-
 // 文章
 //
 Route::get('/posts', 'PostController@index');
@@ -53,3 +47,22 @@ Route::put('/posts/{post}', 'PostController@update');
 Route::get('/posts/{post}/delete', 'PostController@delete');
 //
 Route::post('/posts/image/upload', 'PostController@imageUpload');
+
+
+// 评论
+
+// 提交评论
+Route::post('/posts/{post}/comment', 'PostController@comment');
+
+
+
+
+
+
+
+
+
+
+
+
+
