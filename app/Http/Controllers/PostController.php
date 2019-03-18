@@ -4,15 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Post;
+use App\Zan;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    /**
+     * 首页
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author yaoyuan
+     */
     public function index() {
-        $posts = Post::orderBy('created_at', 'desc')->withCount('comments')->paginate(6);
+        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'zans'])->paginate(6);
         return view("post/index", compact('posts'));
     }
 
+    /**
+     *详情
+     * @param Post $post
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author yaoyuan
+     */
     public function show(Post $post) {
 
         // 预加载
@@ -21,10 +34,20 @@ class PostController extends Controller
         return view("post/show", compact('post'));
     }
 
+    /**
+     * 写文章页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author yaoyuan
+     */
     public function create() {
         return view("post/create");
     }
 
+    /**
+     * 写文章逻辑
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @author yaoyuan
+     */
     public function store() {
         $this->validate(request(),
             [
@@ -41,9 +64,23 @@ class PostController extends Controller
         return redirect("/posts");
     }
 
+    /**
+     * 编辑文章页面
+     * @param Post $post
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author yaoyuan
+     */
     public function edit(Post $post) {
         return view("post/edit", compact("post"));
     }
+
+    /**
+     * 编辑文章逻辑
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @author yaoyuan
+     */
     public function update(Post $post) {
         $this->validate(request(),
             [
@@ -61,6 +98,15 @@ class PostController extends Controller
 
         return redirect("/posts/{$post->id}");
     }
+
+    /**
+     * 删除文章
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @author yaoyuan
+     */
     public function delete(Post $post) {
         $this->authorize('delete', $post);
         $post->delete();
@@ -77,6 +123,12 @@ class PostController extends Controller
         return asset('storage/'. $path);
     }
 
+    /**
+     * 评论
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     * @author yaoyuan
+     */
     public function comment(Post $post) {
         $this->validate(request(),
             [
@@ -92,5 +144,34 @@ class PostController extends Controller
 
         return back();
 
+    }
+
+    /**
+     * 点赞
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     * @author yaoyuan
+     */
+    public function zan(Post $post){
+        $param = [
+          "user_id" => \Auth::id(),
+          "post_id" => $post->id
+        ];
+
+        Zan::firstOrCreate($param);
+
+        return back();
+    }
+
+    /**
+     * 取消赞
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     * @author yaoyuan
+     */
+    public function unzan(Post $post){
+        $post->zan(\Auth::id())->delete();
+        return back();
     }
 }

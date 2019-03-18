@@ -55,6 +55,14 @@ Route::post('/posts/image/upload', 'PostController@imageUpload');
 Route::post('/posts/{post}/comment', 'PostController@comment');
 
 
+// 点赞
+
+//
+Route::get('/posts/{post}/zan', 'PostController@zan');
+//
+Route::get('/posts/{post}/unzan', 'PostController@unzan');
+
+
 
 
 
