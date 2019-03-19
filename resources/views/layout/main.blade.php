@@ -61,7 +61,6 @@
         });
 
         $(".like-button").click(function (event) {
-            alert(1);
             var target = $(event.target);
             var current_like = target.attr('like-value');
 
