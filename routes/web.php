@@ -37,6 +37,8 @@ Route::get('/posts', 'PostController@index');
 Route::get('/posts/create', 'PostController@create');
 //
 Route::post('/posts', 'PostController@store');
+// 搜索
+Route::get('/posts/search', 'PostController@search');
 //
 Route::get('/posts/{post}', 'PostController@show');
 //
@@ -61,6 +63,9 @@ Route::post('/posts/{post}/comment', 'PostController@comment');
 Route::get('/posts/{post}/zan', 'PostController@zan');
 //
 Route::get('/posts/{post}/unzan', 'PostController@unzan');
+
+
+
 
 
 
