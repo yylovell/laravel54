@@ -175,6 +175,11 @@ class PostController extends Controller
         return back();
     }
 
+    /**
+     * 全文检索
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author yaoyuan
+     */
     public function search() {
         $this->validate(request(), [
            'query' => 'required'

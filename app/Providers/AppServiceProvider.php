@@ -16,6 +16,12 @@ class AppServiceProvider extends ServiceProvider
     {
         // mb4string
         Schema::defaultStringLength(191);
+
+        // 视图合成器
+        \View::composer('layout.sidebar', function ($view){
+            $topic = \App\Topic::all();
+            $view->with('topics', $topic);
+        });
     }
 
     /**

@@ -73,6 +73,13 @@ Route::post('/user/{user}/unfan', 'UserController@unfan');
 Route::get('/user/{user}', 'UserController@show');
 
 
+// 专题
+
+Route::get('/topic/{topic}', 'TopicController@show');
+
+Route::post('/topic/{topic}/submit', 'TopicController@submit');
+
+
 
 
 
