@@ -40,6 +40,20 @@ Route::group(['prefix' => 'admin'], function (){
            Route::post('/posts/{post}/status', '\App\Admin\Controllers\PostController@status');
        });
 
+       // 专题模块
+       Route::group(['middleware' => 'can:topic'], function(){
+           Route::resource('topics', '\App\Admin\Controllers\TopicController', ['only' => [
+               'index', 'create', 'store', 'destroy'
+           ]]);
+       });
+
+       // 通知模块
+       Route::group(['middleware' => 'can:notice'], function(){
+           Route::resource('notices', '\App\Admin\Controllers\NoticeController', [
+               'only' => ['index', 'create', 'store'],
+           ]);
+       });
+
 
    });
 

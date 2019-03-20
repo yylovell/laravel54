@@ -24,12 +24,6 @@ Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');
 
 
-
-
-
-
-
-
 Route::group(['middleware' => 'auth:web'], function (){
     // 文章
 //
@@ -73,11 +67,11 @@ Route::group(['middleware' => 'auth:web'], function (){
 
 
 // 点赞
-
-//
     Route::get('/posts/{post}/zan', 'PostController@zan');
-//
     Route::get('/posts/{post}/unzan', 'PostController@unzan');
+
+    // 通知
+    Route::get('/notices', '\App\Http\Controllers\NoticeController@index');
 
 });
 
