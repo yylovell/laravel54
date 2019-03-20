@@ -27,6 +27,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // 权限门卫
+        $permissions = \App\AdminPermission::all();
+        foreach ($permissions as $permission){
+            Gate::define($permission->name, function ($user) use ($permission){
+                return $user->hasPermission($permission);
+            });
+        }
     }
 }
