@@ -89,6 +89,8 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+
+                <img src="http://www.yylovell.cn/public/static/index/images/luts.png" alt="" >
             </div>
         </div>
     </body>
